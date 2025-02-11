@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LandingPage() {
   const [scrollY, setScrollY] = useState(0);
   const [showTooltip, setShowTooltip] = useState(true);
+  const [account, setAccount] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,6 +61,10 @@ export default function LandingPage() {
     }
   ];
 
+  const connectWallet = async () => {
+    navigate('/auth');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white scroll-section">
       
@@ -83,8 +88,9 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-6">
             <Twitter className="w-6 h-6 text-gray-400 hover:text-white cursor-pointer" />
-            <button onClick={() => navigate('/')} className="bg-white/10 px-6 py-2 rounded-full text-white hover:bg-white/20 transition-all">
-              CONNECT WALLET
+            <a href="/white paper - music recommendation (NFT).pdf" download className="bg-white/10 px-6 py-2 rounded-full text-white hover:bg-white/20 transition-all">Whitepaper</a>
+            <button onClick={connectWallet} className="bg-white/10 px-6 py-2 rounded-full text-white hover:bg-white/20 transition-all">
+              {account ? 'Wallet Connected' : 'CONNECT WALLET'}
             </button>
             <Menu className="md:hidden w-6 h-6" />
           </div>
