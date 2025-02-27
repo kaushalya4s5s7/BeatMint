@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpLogin() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (!(window as any).ethereum) {
-        alert('MetaMask is not installed. Please install it to use this feature.');
+        alert(
+          "MetaMask is not installed. Please install it to use this feature."
+        );
         return;
       }
-      const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await (window as any).ethereum.request({
+        method: "eth_requestAccounts",
+      });
       if (accounts && accounts.length > 0) {
         // Here you would typically send the email, password, and wallet address to your backend
-        console.log('Connected account:', accounts[0]);
-        console.log('Email:', email);
+        console.log("Connected account:", accounts[0]);
+        console.log("Email:", email);
         // Navigate to profile setup
-        navigate('/profile-setup');
+        navigate("/profile-setup");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to connect wallet');
+      console.error("Error:", error);
+      alert("Failed to connect wallet");
     }
   };
 
@@ -43,9 +47,9 @@ export default function SignUpLogin() {
       <div className="container mx-auto px-6 pt-24">
         <div className="max-w-md mx-auto bg-white/5 backdrop-blur-lg rounded-xl p-8">
           <h2 className="text-2xl font-bold text-center mb-6">
-            {isLogin ? 'Login' : 'Sign Up'} to RhythMint
+            {isLogin ? "Login" : "Sign Up"} to RhythMint
           </h2>
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium mb-2">Email</label>
@@ -58,7 +62,7 @@ export default function SignUpLogin() {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium mb-2">Password</label>
               <input
@@ -75,7 +79,7 @@ export default function SignUpLogin() {
               type="submit"
               className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 rounded-full transition-all"
             >
-              {isLogin ? 'Login' : 'Sign Up'} with MetaMask
+              {isLogin ? "Login" : "Sign Up"} with MetaMask
             </button>
           </form>
 
@@ -84,7 +88,9 @@ export default function SignUpLogin() {
               onClick={() => setIsLogin(!isLogin)}
               className="text-sm text-white/60 hover:text-white"
             >
-              {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
+              {isLogin
+                ? "Don't have an account? Sign Up"
+                : "Already have an account? Login"}
             </button>
           </div>
         </div>
